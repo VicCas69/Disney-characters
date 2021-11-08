@@ -39,5 +39,21 @@ function characterRender(character){
     
 }
 
-//characters()
+document.getElementById('search-btn').addEventListener('click', function(e) {
+    e.preventDefault()
+    //let cont = document.getElementById('character-container')
+    while (document.getElementById('character-container').firstChild) {
+        document.getElementById('character-container').removeChild(document.getElementById('character-container').firstChild)}
+    characters()
+})
+document.getElementById('allChar-btn').addEventListener('click', function(e) {
+    e.preventDefault()
+    while(document.getElementById('character-container').firstChild){
+        document.getElementById('character-container').removeChild(document.getElementById('character-container').firstChild) 
+    }
+    allCharacters()
+})
+
+
+
 

@@ -16,19 +16,23 @@ function allCharacters(){
 
 function characterRender(character){
    
-    let name = document.createElement('div');
+    let name = document.createElement('h2');
     let image = document.createElement('img');
     let btn = document.createElement('button')
     let div = document.createElement('div')
 
     name.innerText = character.name;
     image.src = character.imageUrl;
+    image.className = 'picture'
     btn.innerText = 'Like'
+    //btn.className = 'picture'
     btn.addEventListener('click', function(){
         if(btn.innerText === 'Like'){
             btn.innerText = 'Liked'
+            btn.style.backgroundColor = 'red';
         }else{
             btn.innerText = 'Like'
+            btn.style.backgroundColor = 'white';
         }
     })
     

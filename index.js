@@ -1,18 +1,15 @@
-function characters(){
-    return fetch("http://api.disneyapi.dev/characters")
-    .then(res=>res.json())
-    .then(data=>data.data.forEach(c=>{
-        if(c.name.toLowerCase() === document.getElementById('search').value.toLowerCase()){
-            characterRender(c)
-        }
-    }))
-}
+let chars = [];
 
 function allCharacters(){
-    return fetch("http://api.disneyapi.dev/characters")
+    fetch("http://api.disneyapi.dev/characters")
     .then(res=>res.json())
-    .then(data=>data.data.forEach(c=>characterRender(c))
-)}
+    .then(data=>data.data.forEach(c=> chars.push(c)))
+}
+allCharacters()
+
+function characters(){
+    chars.forEach(c=>characterRender(c))
+}
 
 function characterRender(character){
    
@@ -45,17 +42,16 @@ function characterRender(character){
 
 document.getElementById('search-btn').addEventListener('click', function(e) {
     e.preventDefault()
-    //let cont = document.getElementById('character-container')
-    while (document.getElementById('character-container').firstChild) {
-        document.getElementById('character-container').removeChild(document.getElementById('character-container').firstChild)}
-    characters()
+    let name = chars.filter(c=>c.name.toLowerCase() === document.getElementById('search').value.toLowerCase())
+    document.getElementById('character-container').innerHTML = ''
+    name.forEach(c=>characterRender(c))
+    //})
 })
+
 document.getElementById('allChar-btn').addEventListener('click', function(e) {
     e.preventDefault()
-    while(document.getElementById('character-container').firstChild){
-        document.getElementById('character-container').removeChild(document.getElementById('character-container').firstChild) 
-    }
-    allCharacters()
+    document.getElementById('character-container').innerHTML = ''
+    characters()
 })
 
 
